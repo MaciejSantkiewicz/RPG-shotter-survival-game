@@ -12,7 +12,6 @@ Code based on all things I have learned from this course: https://www.udemy.com/
 <li)move with W,S,A,D and shoot with LMB. To unpause the game when the level up pops up press SPACE or ESC
 </ul>
 <p></p>
-<p></p>
 <b>Code features:</b>
 <ul>
 <li>easy access to expand the arsenal, skills and stats of the player
