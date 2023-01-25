@@ -31,7 +31,7 @@ class AllSprites(pygame.sprite.Group): #class that loads and updates all sprites
 
 
 
-class Game(): #game loop class
+class Game(): #main game loop class
     def __init__(self):
         pygame.init()
         self.display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
@@ -55,17 +55,16 @@ class Game(): #game loop class
         self.setup()
 
         self.enemies_timer = pygame.event.custom_type() 
-        pygame.time.set_timer(self.enemies_timer, 5000)
+        pygame.time.set_timer(self.enemies_timer, 5000) #sets the time between every enemy wave in milisecond
 
         self.enemy_speed_boost_timer = pygame.event.custom_type() 
-        pygame.time.set_timer(self.enemy_speed_boost_timer, 10000)
+        pygame.time.set_timer(self.enemy_speed_boost_timer, 10000) #sets the time between every boost to speed enemy gets 
 
-        self.spawn_limit = len(self.monsters)
-        self.max_monster = 12 
-        self.can_spawn = True
+        self.spawn_limit = len(self.monsters) #sets the enemy spawn limit
+        self.max_monster = 12 #sets how many monsters can appear on the map
+        self.can_spawn = True #checks if the enemies can spawn
         self.general_font = pygame.font.Font('font/font.ttf',50)
-        self.exp_bonus = 10
-
+        self.exp_bonus = 10 #add this amount to player's exp with every kill
 
 
        
@@ -113,7 +112,7 @@ class Game(): #game loop class
         
            
  
-    def display_stats(self):  
+    def display_stats(self):   #displays all stats of the game (current weapon, ammo, health, exp, monster's limit and player's speed)
         self.weapon_d_image = pygame.image.load(f"sprites/guns/{self.player.current_weapon}/right.png").convert_alpha()
         scaled_w = self.weapon_d_image.get_width()
         scaled_h = self.weapon_d_image.get_height()
@@ -166,7 +165,7 @@ class Game(): #game loop class
             for bullet in self.weapon_group.sprites():
                 sprites = pygame.sprite.spritecollide(bullet, self.monsters, False)
                 for sprite in sprites:
-                    sprite.killed()
+                    sprite.killed() #sends the information to sprite's class to delets itself if it gets killed
 
         for obstacle in self.obstacles.sprites():
             pygame.sprite.spritecollide(obstacle, self.bullets, True)
@@ -176,10 +175,10 @@ class Game(): #game loop class
             for sprite in sprites:
                 sprite.killed()
 
-            ammo_change = randint(1,5)
-            ammo_picks_chances = randint(1,100)
+            ammo_change = randint(1,5) #sets which pick-up will spawn after killing the enemy
+            ammo_picks_chances = randint(1,100) #sets % from 1-100 for pickap chance
             ammo_types = ["","rifleammo", "shotgunammo", "pistolammo", "lvlbox", "medkit"]
-            if ammo_picks_chances <= 30:
+            if ammo_picks_chances <= 30: #chance indicatior for every pick-up
                 ammo_pick = 3
             elif ammo_picks_chances > 30 <= 45:
                 ammo_pick = 2
@@ -192,18 +191,18 @@ class Game(): #game loop class
 
 
             
-            if sprites:
+            if sprites: #chacks which pick-up should spawn
                 if ammo_change == 1:
                     Ammo([self.all_sprites, self.ammo_group], bullet.pos, ammo_types[ammo_pick])
                 bullet.kill()
 
-                self.player.exp = self.player.exp + (10 + self.exp_bonus) 
+                self.player.exp = self.player.exp + (10 + self.exp_bonus) #adds exp to player
 
     
     def collect_ammo(self):
         for ammo in self.ammo_group.sprites():
             sprites = pygame.sprite.spritecollide(ammo, self.player_group, False)
-            if sprites:
+            if sprites:  #adds specified bonus (ammo/health/exp) base on what player has picked up
                 if ammo.type == "rifleammo":
                     self.weapon.rifle_ammo += 120
                 if ammo.type == "shotgunammo":
@@ -218,7 +217,7 @@ class Game(): #game loop class
                     self.max_heal = self.heal + self.player.health
                     if self.max_heal > self.player.max_health:
                         self.player.health = self.player.max_health
-                ammo.kill()
+                ammo.kill() #delets the pick-up sprite after player will pick it up
 
 
     
@@ -233,7 +232,7 @@ class Game(): #game loop class
                     player = self.player,
                     speed = self.speed_boost
                             )
-        for enemy in self.monsters.sprites():
+        for enemy in self.monsters.sprites(): #spawns weapon for every enemy 
             weapons = EnemyWeapon(self.all_sprites, enemy.rect.midright, enemy = enemy)
 
                 
@@ -264,7 +263,7 @@ class Game(): #game loop class
             
 
 
-            self.spawn_limit = len(self.monsters)
+            self.spawn_limit = len(self.monsters) #checks max enemies spawn limit
 
 
             
@@ -298,7 +297,7 @@ class Game(): #game loop class
             self.can_roll = True
 
 
-            if self.player.level_up_status == True:
+            if self.player.level_up_status == True: #chakes if player has leveled up, if so, it paused the game (stops all movement including bullets)
                 self.pause = True
                 self.skill_box.active = True
                 self.player.attacking = False
@@ -312,7 +311,7 @@ class Game(): #game loop class
                     for monster in self.monsters.sprites():
                         monster.speed = 0
 
-            if self.pause == True and self.skill_box.active:
+            if self.pause == True and self.skill_box.active: #display the skill that was rolled
                 self.display_bonus = f"{self.skill_box.name}"
                 self.display_bonus_surf = self.general_font.render(self.display_bonus, False, 40)
                 self.display_bonus_rect = self.display_bonus_surf .get_rect(center = (WINDOW_WIDTH/2, WINDOW_HEIGHT/2+50))
