@@ -19,7 +19,7 @@ class Weapon(pygame.sprite.Sprite):
 
         self.rect = self.image.get_rect(midleft = (0, 0))
         
-
+        #all ammo types
         self.pistol_ammo = 30
         self.rifle_ammo = 120
         self.shotgun_ammo = 60
@@ -30,7 +30,7 @@ class Weapon(pygame.sprite.Sprite):
 
 
 
-        self.accuracy = uniform(-0.075, 0.075)
+        self.accuracy = uniform(-0.075, 0.075) #base accurancy of all weapons, used only to prevent game from crashing
    
     def attack_timer(self):
         if not self.can_shoot:
@@ -38,16 +38,18 @@ class Weapon(pygame.sprite.Sprite):
             if current_time - self.shoot_time > self.attack_speed:
                 self.can_shoot = True
 
-    def draw_weapon(self, pos, direction, current_weapon):
+    def draw_weapon(self, pos, direction, current_weapon): #all weapons features are included here
         self.mouse_pos_x, self.mouse_pos_y = pygame.mouse.get_pos()
         self.current_weapon = current_weapon
         self.pos = pos
         self.weapon_direction = direction
 
-        self.weapon_equiped()
-        self.weapon_stats()
+        self.weapon_equiped() #checks which weapon is equipped
+        self.weapon_stats() #loads weapon statistics
         self.image = pygame.image.load(f"sprites/guns/{self.current_weapon}/right.png").convert_alpha()
 
+        
+        #weapon's sprite is loaded only once, and image just flips and rotates with player's direction
         self.flip_right = pygame.transform.flip(self.image, False, False)
         self.flip_left = pygame.transform.flip(self.image, True, False)
         self.flip_up = pygame.transform.flip(self.image, False, False)
@@ -63,6 +65,7 @@ class Weapon(pygame.sprite.Sprite):
         self.flip_sword_r = pygame.transform.rotate(self.image, 90)
         self.flip_sword_l = pygame.transform.rotate(self.image, -90)
 
+        #updates the position of the weapon based on the mouse position 
         if not self.current_weapon == "sword":
             if self.mouse_pos_x > 500 < 1200 and self.mouse_pos_y > 200 < 400:
                 self.weapon_direction = "right"
@@ -100,10 +103,10 @@ class Weapon(pygame.sprite.Sprite):
         self.gun_projectiles.extend(self.add_projectal)
 
         
-
-        if not self.paused:
+        
+        if not self.paused: #prevents the player from switching the weapon while game is paused
             if not self.current_weapon == "sword":
-                if self.player.attacking and self.can_shoot and not self.no_ammo:
+                if self.player.attacking and self.can_shoot and not self.no_ammo: #renders the bullets based on weapon's direction
                     if self.weapon_direction == "right":
                         for projectal in self.gun_projectiles:
                             self.accuracy = uniform(-self.spread, self.spread)
@@ -155,7 +158,7 @@ class Weapon(pygame.sprite.Sprite):
 
 
 
-        if self.current_ammo <= 0:
+        if self.current_ammo <= 0: #check if ammo is not 0 or below
             self.no_ammo = True
         else:
             self.no_ammo = False
@@ -165,7 +168,7 @@ class Weapon(pygame.sprite.Sprite):
 
 
 
-    def weapon_stats(self):
+    def weapon_stats(self): #all weapons' stats
         if self.current_weapon == "pistol":
             self.gun_projectiles = ["1"]
             self.attack_speed = 500 
