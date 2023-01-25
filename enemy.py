@@ -23,7 +23,7 @@ class Enemies:    #base class for every monster in the game, can be expanded
         return (distance, direction)
 
 
-    def face_player(self):
+    def face_player(self): #enemies fill seek and face the player based on his position
         distance, direction = self.get_player_position()
         if -1 < direction.y <1:
             if direction.x < 0:
@@ -60,7 +60,7 @@ class Enemies:    #base class for every monster in the game, can be expanded
 
 
 
-    def walk_to_player(self):
+    def walk_to_player(self): #enemies fill seek and got to player's position
         distance, direction = self.get_player_position()
         if self.attack_radius < distance < self.walk_radius:
             self.direction = direction
