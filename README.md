@@ -8,8 +8,10 @@ Code based on all things I have learned from this course: https://www.udemy.com/
 <li>pick-ups like ammo, health, exp
 <li>experience and skills/weapon upgrades system
 <li>unlimited waves of enemies that will scale with time
-<li>player can shoot in 4 direction (up, down, left and right) while moving in any direction
+<li>player can shoot in 4 direction (up, down, left and right) based on mouse position
+<li)move with W,S,A,D and shoot with LMB. To unpause the game when the level up pops up press SPACE or ESC
 </ul>
+<p></p>
 <p></p>
 <b>Code features:</b>
 <ul>
