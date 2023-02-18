@@ -1,13 +1,13 @@
 # RPG-shotter-survival-game
 Code based on all things I have learned from this course: https://www.udemy.com/course/learn-python-by-making-games/
 
-Overview:
+<h1>**Overview:**</h1>
 ![2](https://user-images.githubusercontent.com/111911254/219868899-fdc58232-488c-4d1c-aae7-50dc4b6f9fc7.jpg)
 
-Gamestart:
+<h1>**Gamestart:**</h1>
 ![1](https://user-images.githubusercontent.com/111911254/219868858-91cbe44e-a251-4474-aca1-ca215a848c00.jpg)
 
-Level up pop-up:
+<h1>**Level up pop-up:**</h1>
 ![3](https://user-images.githubusercontent.com/111911254/219868859-dec64ef7-ad99-45c4-be6e-af8f289f3dee.jpg)
 
 
