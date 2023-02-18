@@ -2,7 +2,7 @@
 Code based on all things I have learned from this course: https://www.udemy.com/course/learn-python-by-making-games/
 
 Overview:
-![2](https://user-images.githubusercontent.com/111911254/219868857-168b4460-41c0-4aaf-9757-3524eb25dbdd.jpg
+![2](https://user-images.githubusercontent.com/111911254/219868899-fdc58232-488c-4d1c-aae7-50dc4b6f9fc7.jpg)
 
 Gamestart:
 ![1](https://user-images.githubusercontent.com/111911254/219868858-91cbe44e-a251-4474-aca1-ca215a848c00.jpg)
